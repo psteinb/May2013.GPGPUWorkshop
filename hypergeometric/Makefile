@@ -1,15 +1,8 @@
-ifdef MPI_ROOT
-CPPINCLUDES=-I$(MPI_ROOT)/include
-else
-#let's hope that pkg-config is defined
-CPPINCLUDES ?= $(shell pkg-config --cflags mpich2-ch3)
-endif
-
 
 ifdef CPPINCLUDES
-	CPPINCLUDES += -lboost_program_options  -lboost_date_time -lboost_mpi -lboost_serialization
+	CPPINCLUDES += -lboost_program_options  -lboost_date_time 
 else
-	CPPINCLUDES = -lboost_program_options    -lboost_date_time -lboost_mpi -lboost_serialization 
+	CPPINCLUDES = -lboost_program_options    -lboost_date_time 
 endif
 
 CPPINCLUDES += $(ROOTLIBS) $(ROOTCFLAGS)

@@ -132,15 +132,13 @@ int main (int argc, char** argv){
 
   //////////////////////////////////////////////////////////////////////////////////////////
   // writing everything to a file if required
-  if(dump_result){
+  if(!output_location.empty()){
+    std::cout << "Writing output to " << output_location << std::endl;
     std::ofstream outfile(output_location.c_str());
-    std::cout.precision(7);;
     outfile.precision(7);
-    std::cout << ">> v P" << endl;
     outfile << "v P" << endl;
 
     for(size_t i = 0; i < dist.size(); i++){
-      std::cout << ">> "<< i << " " << dist.at(i) << std::endl;
       outfile <<  i << " " << dist.at(i) << std::endl;
     }
     outfile.close();

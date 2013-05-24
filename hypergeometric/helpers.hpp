@@ -60,7 +60,7 @@ struct cl_args_reader {
     q_second_upper_ (0),
     progress_bar_   (false),
     dump_result_    (false),
-    output_location_("results.log")
+    output_location_("")
   {
     int opt = 0;
     try{
