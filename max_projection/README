@@ -1,0 +1,28 @@
+BACKGROUND/GOAL
+---------------
+This small application is adapted from a library that is supposed to do image processing very fast. We have cameras for microscopes that produce 100 images per second with 2048x2048 pixels of 16-bit unsigned integers. These cameras are to be operated in a 24/7 mode and before writing 850 MB/s to disk, cropping, reduction etc should take place!!
+
+The goal of this small application is to take a stack of images produced by the camera, produce the maximum projection and search for maximum pixel intensity within the projection!! the application approximates roughly that a biological cell or embryo is sliced optically (like a tomogram) and the image stack is the result of this experiment. 
+
+Although the timing seems appropriate, the number of frames per second is not (only 75 fps). Since problem is likely to be ported to systems supporting 2 cameras etc. it would be nice to move this application onto the GPU and see how many frames per second can be achieved.
+
+Dependencies
+------------
+This package uses gcc as the default compiler. There are three dependencies:
+* (GNU) make
+* the C++ standard library
+* boost date_time
+
+Compilation
+-----------
+In order to compile the application with dbg symbols, invoke:
+$ make max_proj.exe
+To build with optimisation turned on, call:
+$ make max_proj.exeO
+
+Timings and Parameters (hh:mm:ss)
+---------------------------------
+(production)
+./max_proj.exeO -n 100 -W 2048 -H 2048
+00:00:01.3 on a single core of Intel(R) Core(TM)2 Duo CPU     P8700  @ 2.53GHz
+
