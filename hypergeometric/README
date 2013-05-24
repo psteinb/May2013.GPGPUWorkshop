@@ -20,10 +20,12 @@ Timings and Parameters (hh:mm:ss)
 ---------------------------------
 (small)
 time ./hypergeom_pdf_cpu.exeO -n 300 -a 100 -b 250 -q 250 -o small.results
-00:00:01.2 on single CPU
+00:00:01.2 on single core of Intel(R) Xeon(R) CPU E5-2630 0 @ 2.30GHz 
 
 (medium)
 time ./hypergeom_pdf_cpu.exeO -n 1000 -a 545 -b 623 -q 872 -o medium.results
+00:14:06 on single core of Intel(R) Xeon(R) CPU E5-2630 0 @ 2.30GHz
 
 (large, for production aka the paper)
 time ./hypergeom_pdf_cpu.exeO -n 4137 -a 3001 -b 3782 -q 994 -o large.results
+00:00:00 on single core of Intel(R) Xeon(R) CPU E5-2630 0 @ 2.30GHz 

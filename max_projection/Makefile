@@ -1,8 +1,8 @@
 
 ifdef CPPINCLUDES
-	CPPINCLUDES += -lboost_program_options  -lboost_date_time 
+	CPPINCLUDES +=  -lboost_date_time 
 else
-	CPPINCLUDES = -lboost_program_options    -lboost_date_time 
+	CPPINCLUDES = -lboost_date_time 
 endif
 
 CPPINCLUDES += $(ROOTLIBS) $(ROOTCFLAGS)

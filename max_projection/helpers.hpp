@@ -11,14 +11,6 @@ typedef long integer_t;
 
 template<typename T>
 bool charPtr_to(char * _optarg, T& _result){
-  // instream.str(optarg);
-  // if( !(instream >> meta) ){
-  // 	std::cerr << __FILE__ << "\t invalid argument format for [-n]" << std::endl;
-  // 	total = 0;
-  // }
-  // else{
-  // 	total = meta;
-  // }
   std::istringstream instream;instream.str(_optarg);
   T meta;
   if( !(instream >> meta) ){
@@ -31,52 +23,37 @@ bool charPtr_to(char * _optarg, T& _result){
 }
 
 
-void printArgs(unsigned _n,unsigned _a,unsigned _b,unsigned _q){
-  
-  std::cout << "\t -n = " << _n
-	    << "\t -a = " << _a
-	    << "\t -b = " << _b
-	    << "\t -q = " << _q
-	    << "\n";
-}
 
 struct cl_args_reader {
   
 
   bool		gaveHelp_	;
-  integer_t 	total_		;
-  integer_t 	a_lower_	;
-  integer_t 	b_upper_	;
-  integer_t 	q_second_upper_	;
-  bool 		progress_bar_	;
-  bool 		dump_result_	;
+  integer_t 	numframes_		;
+  integer_t 	width_	;
+  integer_t 	height_	;
+  bool 		verbose_	;
   std::string   output_location_;
 
   cl_args_reader(int argc, char** argv) : 
     gaveHelp_       (false),
-    total_          (0),
-    a_lower_        (0),
-    b_upper_        (0),
-    q_second_upper_ (0),
-    progress_bar_   (false),
-    dump_result_    (false),
+    numframes_          (0),
+    width_        (0),
+    height_        (0),
+    verbose_   (false),
     output_location_("")
   {
     int opt = 0;
     try{
-      while( (opt = getopt(argc, argv, "n:a:b:q:o:pdh" ))!=-1 ){       
+      while( (opt = getopt(argc, argv, "n:W:H:o:vh" ))!=-1 ){       
 	switch(opt){
 	case 'n':
-	  charPtr_to(optarg,total_);
+	  charPtr_to(optarg,numframes_);
 	  break;
-	case 'a':
-	  charPtr_to(optarg,a_lower_);
+	case 'W':
+	  charPtr_to(optarg,width_);
 	  break;
-	case 'b':
-	  charPtr_to(optarg,b_upper_);
-	  break;
-	case 'q':
-	  charPtr_to(optarg,q_second_upper_);
+	case 'H':
+	  charPtr_to(optarg,height_);
 	  break;
 	case 'o': 
 	  output_location_ = optarg;
@@ -85,11 +62,8 @@ struct cl_args_reader {
 	  gaveHelp_ = true;
 	  printHelp();
 	  break; 
-	case 'd': 
-	  dump_result_ = true;
-	  break; 
-	case 'p': 
-	  progress_bar_ = true;
+	case 'v': 
+	  verbose_ = true;
 	  break; 
 	default:
 	  gaveHelp_ = true;
@@ -109,32 +83,21 @@ struct cl_args_reader {
   
     std::cout << "\t usage:\n"
 	      << "\t executable <flags/args>\n"
-	      << "\t -n <num>\t\t ... total \n"
-	      << "\t -a <num>\t\t ... a_lower \n"
-	      << "\t -b <num>\t\t ... b_upper \n"
-	      << "\t -q <num>\t\t ... q_second_upper \n"
+	      << "\t -n <num>\t\t ... numframes \n"
+	      << "\t -H <num>\t\t ... width \n"
+	      << "\t -W <num>\t\t ... height \n"
 	      << "\t -o <file_location>\t ... file to dump the results to (path must exist)\n"
-	      << "\t -p\t\t\t ... print progress bar (default: false)\n"
-	      << "\t -d\t\t\t ... dump results at end (default: false)\n"
+	      << "\t -v\t\t\t ... verbose output \n"
 	      << "\t -h\t\t\t ... print help message\n";
   }
 
-};
-
-template <typename NumType = long>
-class increaseByOne {
-
-  NumType current_;
-  
-public:
-  
-  increaseByOne(const NumType& _init_value):
-    current_(_init_value){}
+  friend std::ostream& operator<<(std::ostream& _stream, const cl_args_reader& _config){
+    std::cout << ">> num frames : " << _config.numframes_ << ", w x h: " << _config.width_ << "x" << _config.height_ << "\n"
+	      << ">> output : "<< _config.output_location_ << "\n";
+      
+    };
 
 
-  NumType operator()() {
-    return current_++;
-  }
 };
 
 void store_results(const std::vector<double>& _results, const std::string& _filename){
