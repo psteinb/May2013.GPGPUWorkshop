@@ -1,0 +1,8 @@
+*.exe*
+*.texe*
+*.cuX*
+*.o
+*.gch
+*.log
+*.results
+*~
