@@ -70,17 +70,12 @@ int main (int argc, char** argv){
   double third_looplevel_invariant  = 0.;
 
   double sum = 0.;
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Calculation starts here
+
   for(firstIdx = firstIdxBegin; firstIdx < firstIdxEnd; firstIdx++){
-
-    if(progress_bar){
-      prog = ((firstIdx+0.0)/alpha)*100;
-
-      std::cout << setprecision(3) << "\r   Calculating probabilities... " << prog << "%";
-      //      fflush(stdout);
-      std::cout.flush();
-
-    }
-
+    
     qs = 0.;
     sum = 0.;
     mmin = max((constant_1-firstIdx),zero);
@@ -121,7 +116,6 @@ int main (int argc, char** argv){
 	  }
 	  
 	  qs += exp( sum );
-	  //qs = qs + exp( (lgamma(n-q+1) - lgamma(n-q-i+l+1) - lgamma(i-l+1) + lgamma(q+1) - lgamma(l-j+1) - lgamma(j+1) - lgamma(q-l-m+1) - lgamma(m+1) + lgamma(n-i-q+l+1) - lgamma(n-q+l-a+m+1) - lgamma(a-i-m+1) + lgamma(n+q-a-m-j+1) - lgamma(n+q-a-m-j-b+i+1) - lgamma(b-i+1) - lgamma(n+1) + lgamma(n-a+1) + lgamma(a+1) - lgamma(n+q+1) + lgamma(n+q-b+1) + lgamma(b+1)) );
 	  
 	}
       }
