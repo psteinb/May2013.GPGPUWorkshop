@@ -1,7 +1,10 @@
-BACKGROUND
-----------
+BACKGROUND/GOAL
+---------------
 This small application calculated the probability densitive function described in 
 http://arxiv.org/abs/1305.0717
+
+The outer loop is to be parallised. The problem hereby is that the time per iteration is NOT constant, see the attached pdf for details.
+
 
 Dependencies
 ------------
