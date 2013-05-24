@@ -19,11 +19,11 @@ $ make hypergeom_pdf_cpu.exeO
 Timings and Parameters (hh:mm:ss)
 ---------------------------------
 (small)
-time ./hypergeom_pdf_cpu.exeO -n 300 -a 100 -b 250 -q 250 -o small_300_100_250_250.results
+time ./hypergeom_pdf_cpu.exeO -n 300 -a 100 -b 250 -q 250 -o small.results
 00:00:01.2 on single CPU
 
 (medium)
 time ./hypergeom_pdf_cpu.exeO -n 1000 -a 545 -b 623 -q 872 -o medium.results
 
-(large, for production)
-time ./hypergeom_pdf_cpu.exeO -n 4137 -a 3001 -b 3782 -q 994 -o large_300_100_250_250.results
+(large, for production aka the paper)
+time ./hypergeom_pdf_cpu.exeO -n 4137 -a 3001 -b 3782 -q 994 -o large.results
